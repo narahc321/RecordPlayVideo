@@ -14,11 +14,15 @@ const HomeScreen: React.FC<ScreenProps> = props => {
         }}>
         <Text>Open Camera</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text>Play Videos</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          props.navigation.navigate('VideosListScreen');
+        }}>
+        <Text>Show Videos List</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}>
-        <Text>Show Videos List</Text>
+        <Text>Play Videos</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  ViewProps,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {ViewProps, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 interface Props extends ViewProps {
   recording: Boolean;

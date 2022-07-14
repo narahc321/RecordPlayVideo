@@ -1,10 +1,13 @@
-import React, {useRef, useState, useCallback} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {StyleSheet, ActivityIndicator} from 'react-native';
 import {Camera, useCameraDevices, VideoFile} from 'react-native-vision-camera';
 import {useIsFocused} from '@react-navigation/native';
+import * as RNFS from 'react-native-fs';
+import SimpleToast from 'react-native-simple-toast';
 
 import {useIsAppForeground} from '../hooks/useIsAppForeground';
 import CaptureButton from './CaptureButton';
+import {DIRECTORY_PATH} from '../Constants';
 
 const CameraView: React.FC = () => {
   const camera = useRef<Camera>(null);
@@ -33,8 +36,23 @@ const CameraView: React.FC = () => {
   // }
   // }, [path, type]);
 
+  useEffect(() => {
+    RNFS.mkdir(DIRECTORY_PATH);
+  }, [DIRECTORY_PATH]);
+
   const saveVideo = async (video: VideoFile) => {
-    console.log(video);
+    const newFilePath =
+      DIRECTORY_PATH +
+      video.path
+        .split('/')
+        .slice(-1)[0]
+        .replace('VisionCamera', 'RecordPlayVideo');
+    await RNFS.moveFile(video.path, newFilePath);
+
+    SimpleToast.show('🎉 Video saved at ' + newFilePath);
+    // const files = await RNFS.readDir(DIRECTORY_PATH);
+    // console.log('All Files ');
+    // files.map(x => console.log(x, '\n\n'));
   };
 
   const clickHandler = async () => {
@@ -69,8 +87,9 @@ const CameraView: React.FC = () => {
         style={StyleSheet.absoluteFill}
         device={device}
         isActive={isAppForeground && isFocused}
-        video={true}
-        audio={true}
+        video
+        audio
+        enableZoomGesture
       />
       <CaptureButton
         style={styles.captureButton}

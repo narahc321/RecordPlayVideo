@@ -9,11 +9,12 @@ const Uploader = (items: ReadDirItem[]) => {
   const item = items[0];
 
   const options: MultipartUploadOptions = {
-    url: 'http://192.168.1.9:5005/api/upload/videos',
+    // url: 'http://192.168.1.9:5005/api/upload/videos',
+    url: 'http://3.110.50.152:5000/api/upload/videos',
     path: item.path,
-    method: 'POST',
+    method: 'PUT',
     type: 'multipart',
-    // maxRetries: 2, // set retry count (Android only). Default 2
+    maxRetries: 1, // set retry count (Android only). Default 2
     headers: {
       'content-type': 'video/mp4', // Customize content-type
       'my-custom-header': 's3headervalueorwhateveryouneed',
@@ -28,19 +29,22 @@ const Uploader = (items: ReadDirItem[]) => {
 
   Upload.startUpload(options)
     .then(uploadId => {
-      console.log('Upload started');
+      console.log('Upload started ', new Date().toLocaleString());
       Upload.addListener('progress', uploadId, data => {
         console.log(`Progress: ${data.progress}`);
       });
       Upload.addListener('error', uploadId, data => {
-        console.log(`Error: ${data.error}`);
+        console.log(
+          `Error: ${JSON.stringify(data)} `,
+          new Date().toLocaleString(),
+        );
       });
       Upload.addListener('cancelled', uploadId, data => {
-        console.log('Cancelled!');
+        console.log('Cancelled!', new Date().toLocaleString());
       });
       Upload.addListener('completed', uploadId, data => {
         // data includes responseCode: number and responseBody: Object
-        console.log('Completed!');
+        console.log('Completed! ', new Date().toLocaleString());
       });
     })
     .catch(err => {

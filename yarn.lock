@@ -6781,6 +6781,11 @@ react-is@^16.13.0, react-is@^16.13.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-native-background-upload@^6.5.1:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-background-upload/-/react-native-background-upload-6.5.1.tgz#862e1d783e608bdca073ca2d7aeae79503e0507c"
+  integrity sha512-cKVCrpQ7xIePL9rh+TBFQw69Z2eG3tL5/R732+I7lfpq6F9xwrwkYDgxqKfGzTtY3V6JZ3ZENCO8MOMEh6O0jw==
+
 react-native-codegen@^0.69.1:
   version "0.69.1"
   resolved "https://registry.npmjs.org/react-native-codegen/-/react-native-codegen-0.69.1.tgz"

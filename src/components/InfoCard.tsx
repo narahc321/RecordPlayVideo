@@ -11,9 +11,10 @@ import {ReadDirItem} from '../Types';
 
 interface Props extends ListRenderItemInfo<ReadDirItem> {
   onPlay: (index: number) => void;
+  onUpload: (index: number) => void;
 }
 
-const InfoCard: React.FC<Props> = ({index, item, onPlay}) => {
+const InfoCard: React.FC<Props> = ({index, item, onPlay, onUpload}) => {
   // return <Text>{JSON.stringify([index, separators, item])}</Text>;
   return (
     <View style={styles.container}>
@@ -27,7 +28,11 @@ const InfoCard: React.FC<Props> = ({index, item, onPlay}) => {
         }}>
         <Text>Play</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.uploadButton}>
+      <TouchableOpacity
+        style={styles.uploadButton}
+        onPress={() => {
+          onUpload(index);
+        }}>
         <Text>Upload</Text>
       </TouchableOpacity>
     </View>

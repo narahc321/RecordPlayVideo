@@ -6,6 +6,7 @@ import {ScreenProps} from '../Types';
 import {DIRECTORY_PATH} from '../Constants';
 import {ReadDirItem} from '../Types';
 import InfoCard from '../components/InfoCard';
+import Uploader from '../utils/Uploader';
 
 const VideosListScreen: React.FC<ScreenProps> = ({navigation}) => {
   const [videosList, setVideosList] = useState<ReadDirItem[]>([]);
@@ -27,6 +28,10 @@ const VideosListScreen: React.FC<ScreenProps> = ({navigation}) => {
     return;
   };
 
+  const uploadVideoHandler = (index: number) => {
+    Uploader([videosList[index]]);
+  };
+
   return (
     <View>
       <FlatList
@@ -37,6 +42,7 @@ const VideosListScreen: React.FC<ScreenProps> = ({navigation}) => {
             index={index}
             separators={separators}
             onPlay={playVideoHandler}
+            onUpload={uploadVideoHandler}
           />
         )}
         contentContainerStyle={styles.container}
